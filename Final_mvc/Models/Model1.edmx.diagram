@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a61e34c39ce4ae39b9dbb87c2ea83de" Name="Diagram1">
+        <EntityTypeShape EntityType="Final_MVCModel.Agent" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_MVCModel.DeliveryNote" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_MVCModel.OrdersStatu" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_MVCModel.Product" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_MVCModel.ReceivedNote" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="Final_MVCModel.FK_DeliveryNote1" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_MVCModel.FK_OrdersStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_MVCModel.FK_DeliveryNote" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_MVCModel.FK_DeliveryNote2" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_MVCModel.FK_OrdersStatus1" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_MVCModel.FK_ReceivedNote" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

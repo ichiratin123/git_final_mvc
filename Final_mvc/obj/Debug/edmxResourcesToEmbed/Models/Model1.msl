@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Final_MVCModelStoreContainer" CdmEntityContainer="Final_MVCEntities">
+    <EntitySetMapping Name="Agents">
+      <EntityTypeMapping TypeName="Final_MVCModel.Agent">
+        <MappingFragment StoreEntitySet="Agents">
+          <ScalarProperty Name="AID" ColumnName="AID" />
+          <ScalarProperty Name="AName" ColumnName="AName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliveryNotes">
+      <EntityTypeMapping TypeName="Final_MVCModel.DeliveryNote">
+        <MappingFragment StoreEntitySet="DeliveryNote">
+          <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="AID" ColumnName="AID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="OPrice" ColumnName="OPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdersStatus">
+      <EntityTypeMapping TypeName="Final_MVCModel.OrdersStatu">
+        <MappingFragment StoreEntitySet="OrdersStatus">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="AID" ColumnName="AID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="Final_MVCModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="RPrice" ColumnName="RPrice" />
+          <ScalarProperty Name="OPrice" ColumnName="OPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReceivedNotes">
+      <EntityTypeMapping TypeName="Final_MVCModel.ReceivedNote">
+        <MappingFragment StoreEntitySet="ReceivedNote">
+          <ScalarProperty Name="ReceivedID" ColumnName="ReceivedID" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="RPrice" ColumnName="RPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

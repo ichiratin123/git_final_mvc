@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>FNF Company</h1>
+    <p class="lead">Fresh fruits and delicious Foods you can find.</p>
+    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Products</h2>
+        <p>
+            Place to check products of our company. There are several kinds of Fruits and Foods you can choose in here.
+        </p>
+        <p><a class="btn btn-default" @Html.ActionLink("View more »", "Index", "Products")</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Order status</h2>
+        <p>Place to check your order.</p>
+        <p><a class="btn btn-default" @Html.ActionLink("Orders Status »", "Index", "OrdersStatus")</a></p>
+    </div>
+    <div class="col-md-4">
+            <h2>Create Agent ID</h2>
+            <p>Create an agent account which help users order products.</p>
+            <p><a class="btn btn-default" @Html.ActionLink("Create »", "Create", "Agents")</a></p>
+        </div>
+</div>

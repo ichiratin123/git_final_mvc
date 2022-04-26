@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Final_mvc.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Products</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
+        </td>
+    </tr>
+}
+    
+</table>

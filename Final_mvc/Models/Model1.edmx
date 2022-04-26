@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Final_MVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agents">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeliveryNote">
+          <Key>
+            <PropertyRef Name="DeliveryID" />
+          </Key>
+          <Property Name="DeliveryID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="AID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OPrice" Type="float" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrdersStatus">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Payment" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="RPrice" Type="float" Nullable="false" />
+          <Property Name="OPrice" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReceivedNote">
+          <Key>
+            <PropertyRef Name="ReceivedID" />
+          </Key>
+          <Property Name="ReceivedID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReceivedDate" Type="date" Nullable="false" />
+          <Property Name="ProductID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RPrice" Type="float" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DeliveryNote">
+          <End Role="OrdersStatus" Type="Self.OrdersStatus" Multiplicity="1" />
+          <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="OrdersStatus">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="DeliveryNote">
+              <PropertyRef Name="DeliveryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryNote1">
+          <End Role="Agents" Type="Self.Agents" Multiplicity="1" />
+          <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="DeliveryNote">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryNote2">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="DeliveryNote">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersStatus">
+          <End Role="Agents" Type="Self.Agents" Multiplicity="0..1" />
+          <End Role="OrdersStatus" Type="Self.OrdersStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="OrdersStatus">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersStatus1">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="OrdersStatus" Type="Self.OrdersStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrdersStatus">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceivedNote">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ReceivedNote" Type="Self.ReceivedNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ReceivedNote">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Final_MVCModelStoreContainer">
+          <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryNote" EntityType="Self.DeliveryNote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdersStatus" EntityType="Self.OrdersStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceivedNote" EntityType="Self.ReceivedNote" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DeliveryNote" Association="Self.FK_DeliveryNote">
+            <End Role="OrdersStatus" EntitySet="OrdersStatus" />
+            <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryNote1" Association="Self.FK_DeliveryNote1">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryNote2" Association="Self.FK_DeliveryNote2">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersStatus" Association="Self.FK_OrdersStatus">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="OrdersStatus" EntitySet="OrdersStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersStatus1" Association="Self.FK_OrdersStatus1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrdersStatus" EntitySet="OrdersStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceivedNote" Association="Self.FK_ReceivedNote">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ReceivedNote" EntitySet="ReceivedNote" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Final_MVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DeliveryNotes" Relationship="Self.FK_DeliveryNote1" FromRole="Agents" ToRole="DeliveryNote" />
+          <NavigationProperty Name="OrdersStatus" Relationship="Self.FK_OrdersStatus" FromRole="Agents" ToRole="OrdersStatus" />
+        </EntityType>
+        <EntityType Name="DeliveryNote">
+          <Key>
+            <PropertyRef Name="DeliveryID" />
+          </Key>
+          <Property Name="DeliveryID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OPrice" Type="Double" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agent" Relationship="Self.FK_DeliveryNote1" FromRole="DeliveryNote" ToRole="Agents" />
+          <NavigationProperty Name="OrdersStatu" Relationship="Self.FK_DeliveryNote" FromRole="DeliveryNote" ToRole="OrdersStatus" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_DeliveryNote2" FromRole="DeliveryNote" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="OrdersStatu">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Payment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent" Relationship="Self.FK_OrdersStatus" FromRole="OrdersStatus" ToRole="Agents" />
+          <NavigationProperty Name="DeliveryNote" Relationship="Self.FK_DeliveryNote" FromRole="OrdersStatus" ToRole="DeliveryNote" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrdersStatus1" FromRole="OrdersStatus" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="RPrice" Type="Double" Nullable="false" />
+          <Property Name="OPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="DeliveryNotes" Relationship="Self.FK_DeliveryNote2" FromRole="Products" ToRole="DeliveryNote" />
+          <NavigationProperty Name="OrdersStatus" Relationship="Self.FK_OrdersStatus1" FromRole="Products" ToRole="OrdersStatus" />
+          <NavigationProperty Name="ReceivedNotes" Relationship="Self.FK_ReceivedNote" FromRole="Products" ToRole="ReceivedNote" />
+        </EntityType>
+        <EntityType Name="ReceivedNote">
+          <Key>
+            <PropertyRef Name="ReceivedID" />
+          </Key>
+          <Property Name="ReceivedID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReceivedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RPrice" Type="Double" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ReceivedNote" FromRole="ReceivedNote" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_DeliveryNote1">
+          <End Role="Agents" Type="Self.Agent" Multiplicity="1" />
+          <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="DeliveryNote">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersStatus">
+          <End Role="Agents" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="OrdersStatus" Type="Self.OrdersStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="OrdersStatus">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryNote">
+          <End Role="OrdersStatus" Type="Self.OrdersStatu" Multiplicity="1" />
+          <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="OrdersStatus">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="DeliveryNote">
+              <PropertyRef Name="DeliveryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryNote2">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="DeliveryNote">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersStatus1">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrdersStatus" Type="Self.OrdersStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrdersStatus">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceivedNote">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="ReceivedNote" Type="Self.ReceivedNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ReceivedNote">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Final_MVCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="DeliveryNotes" EntityType="Self.DeliveryNote" />
+          <EntitySet Name="OrdersStatus" EntityType="Self.OrdersStatu" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ReceivedNotes" EntityType="Self.ReceivedNote" />
+          <AssociationSet Name="FK_DeliveryNote1" Association="Self.FK_DeliveryNote1">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="DeliveryNote" EntitySet="DeliveryNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersStatus" Association="Self.FK_OrdersStatus">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="OrdersStatus" EntitySet="OrdersStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryNote" Association="Self.FK_DeliveryNote">
+            <End Role="OrdersStatus" EntitySet="OrdersStatus" />
+            <End Role="DeliveryNote" EntitySet="DeliveryNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryNote2" Association="Self.FK_DeliveryNote2">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DeliveryNote" EntitySet="DeliveryNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersStatus1" Association="Self.FK_OrdersStatus1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrdersStatus" EntitySet="OrdersStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceivedNote" Association="Self.FK_ReceivedNote">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ReceivedNote" EntitySet="ReceivedNotes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Final_MVCModelStoreContainer" CdmEntityContainer="Final_MVCEntities">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="Final_MVCModel.Agent">
+              <MappingFragment StoreEntitySet="Agents">
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="AName" ColumnName="AName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryNotes">
+            <EntityTypeMapping TypeName="Final_MVCModel.DeliveryNote">
+              <MappingFragment StoreEntitySet="DeliveryNote">
+                <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OPrice" ColumnName="OPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdersStatus">
+            <EntityTypeMapping TypeName="Final_MVCModel.OrdersStatu">
+              <MappingFragment StoreEntitySet="OrdersStatus">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="Final_MVCModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="RPrice" ColumnName="RPrice" />
+                <ScalarProperty Name="OPrice" ColumnName="OPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceivedNotes">
+            <EntityTypeMapping TypeName="Final_MVCModel.ReceivedNote">
+              <MappingFragment StoreEntitySet="ReceivedNote">
+                <ScalarProperty Name="ReceivedID" ColumnName="ReceivedID" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="RPrice" ColumnName="RPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
